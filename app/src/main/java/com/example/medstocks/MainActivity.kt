@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         var medicineList:RecyclerView = findViewById(R.id.medicineList)
-        var medicines:ArrayList<Medicine> = ArrayList()
 
         val getMedicinesFromDB = GetMedicinesFromDB()
         getMedicinesFromDB.getMedicinesFromDB(object : GetMedicinesFromDB.onMedicinesLoadedListener {
