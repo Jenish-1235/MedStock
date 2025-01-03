@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "759331026438",
+    "project_id": "medstock-aab17",
+    "storage_bucket": "medstock-aab17.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759331026438:android:231a8d2c46d89fb4803587",
+        "android_client_info": {
+          "package_name": "com.example.medstocks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP2ikbGj7Zlt45woepClNRKopCj_lPOwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
