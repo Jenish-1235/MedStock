@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.example.medstocks.FirebaseOperations.UpdateMedicineQuantityInDB
 import com.example.medstocks.R
 
 class SellMedicineFragment : DialogFragment() {
@@ -42,6 +43,8 @@ class SellMedicineFragment : DialogFragment() {
                 Toast.makeText(requireContext(), "Not enough medicine in stock", Toast.LENGTH_SHORT).show()
             }
             else{
+                var newQuantity = medicineQuantity.toString().toLong() - medicineQuantityNew
+                UpdateMedicineQuantityInDB().updateMedicineQuantityInDB(medicineId.toString(), newQuantity)
                 Toast.makeText(requireContext(), "Medicine sold", Toast.LENGTH_SHORT).show()
                 dismiss()
             }

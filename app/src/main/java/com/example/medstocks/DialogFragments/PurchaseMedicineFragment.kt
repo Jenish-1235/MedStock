@@ -36,12 +36,15 @@ class PurchaseMedicineFragment : DialogFragment() {
 
         val purchaseMedicineButton = view.findViewById<Button>(R.id.purchaseMedicineButton)
         purchaseMedicineButton.setOnClickListener{
-            val medicineQuantity = medicineQuantityInput.text.toString().toLong()
+            val medicineQuantityNew = medicineQuantityInput.text.toString().toLong()
             if (medicineQuantity.toString().isEmpty()){
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
             else{
+                var newQuantity = medicineQuantityNew.toString().toLong() + medicineQuantity.toString().toLong()
+                com.example.medstocks.FirebaseOperations.UpdateMedicineQuantityInDB().updateMedicineQuantityInDB(medicineId.toString(), newQuantity)
                 Toast.makeText(requireContext(), "Medicine purchased", Toast.LENGTH_SHORT).show()
+                dismiss()
             }
         }
 
