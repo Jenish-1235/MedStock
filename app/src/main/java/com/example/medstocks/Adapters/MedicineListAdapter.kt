@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medstocks.Models.Medicine
@@ -45,11 +46,11 @@ class MedicineListAdapter(context: Context, medicineList: ArrayList<Medicine>): 
         holder.expiryDateView.text = "Expiry: " + currentMedicine.expiryDate
         holder.medicineNameView.text = currentMedicine.name
         holder.sellButton.setOnClickListener{
-
+            Toast.makeText(context, "Sell Pressed", Toast.LENGTH_LONG).show()
         }
 
         holder.purchaseButton.setOnClickListener{
-
+            Toast.makeText(context, "Purchase Pressed", Toast.LENGTH_LONG).show()
         }
 
     }
