@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView.EdgeEffectFactory.EdgeDirection
+import com.example.medstocks.FirebaseOperations.AddMedicineToDB
+import com.example.medstocks.Models.Medicine
 import com.example.medstocks.R
 import java.util.Calendar
 
@@ -46,12 +48,15 @@ class AddNewMedicineDialog : DialogFragment() {
             val medicineName = medicineNameInput.text.toString()
             val medicineCompanyName = medicineCompanyNameInput.text.toString()
             val medicineExpiryDate = medicineExpiryDateInput.text.toString()
-            val medicineQuantity = medicineQuantityInput.text.toString()
+            val medicineQuantity = medicineQuantityInput.text.toString().toLong()
 
-            if (medicineName.isEmpty() || medicineExpiryDate.isEmpty() || medicineQuantity.isEmpty()) {
+            if (medicineName.isEmpty() || medicineExpiryDate.isEmpty() || medicineQuantity.toString().isEmpty()){
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(requireContext(), "Medicine added", Toast.LENGTH_SHORT).show()
+                var medicine = Medicine(randomFourDigitIdGenerator(), medicineName,medicineQuantity, medicineExpiryDate, medicineCompanyName)
+                AddMedicineToDB().addMedicineToDB(medicine)
+                dismiss()
             }
             // add new medicine to database
         }
@@ -98,5 +103,10 @@ class AddNewMedicineDialog : DialogFragment() {
 
         datePickerDialog.show()
 
+    }
+
+    private fun randomFourDigitIdGenerator():String{
+        val random = (1000..9999).random()
+        return random.toString()
     }
 }
