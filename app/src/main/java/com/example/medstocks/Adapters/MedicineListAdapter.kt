@@ -2,6 +2,7 @@ package com.example.medstocks.Adapters
 
 import android.content.ClipData.Item
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.medstocks.DialogFragments.PurchaseMedicineFragment
+import com.example.medstocks.DialogFragments.SellMedicineFragment
+import com.example.medstocks.MainActivity
 import com.example.medstocks.Models.Medicine
 import com.example.medstocks.R
 import org.w3c.dom.Text
@@ -45,12 +49,23 @@ class MedicineListAdapter(context: Context, medicineList: ArrayList<Medicine>): 
         holder.companyNameView.text = currentMedicine.companyName
         holder.expiryDateView.text = "Expiry: " + currentMedicine.expiryDate
         holder.medicineNameView.text = currentMedicine.name
+
         holder.sellButton.setOnClickListener{
-            Toast.makeText(context, "Sell Pressed", Toast.LENGTH_LONG).show()
+            val sellMedicineDialog = SellMedicineFragment()
+            val bundle = Bundle()
+            bundle.putString("medicineId", currentMedicine.id)
+            bundle.putString("medicineQuantity", currentMedicine.quantity.toString())
+            sellMedicineDialog.arguments = bundle
+            sellMedicineDialog.show((context as MainActivity).supportFragmentManager, "SellMedicineDialog")
         }
 
         holder.purchaseButton.setOnClickListener{
-            Toast.makeText(context, "Purchase Pressed", Toast.LENGTH_LONG).show()
+            val purchaseMedicineDialog = PurchaseMedicineFragment()
+            val bundle = Bundle()
+            bundle.putString("medicineId", currentMedicine.id)
+            bundle.putString("medicineQuantity", currentMedicine.quantity.toString())
+            purchaseMedicineDialog.arguments = bundle
+            purchaseMedicineDialog.show((context as MainActivity).supportFragmentManager, "PurchaseMedicineDialog")
         }
 
     }
