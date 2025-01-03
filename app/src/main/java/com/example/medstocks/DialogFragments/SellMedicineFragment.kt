@@ -54,8 +54,6 @@ class SellMedicineFragment : DialogFragment() {
         return view
     }
 
-
-    // sets positioning of dialog fragment to bottom of screen.
     override fun onStart() {
         super.onStart()
 
@@ -65,7 +63,7 @@ class SellMedicineFragment : DialogFragment() {
             val window = dialog.getWindow()
             if (window != null){
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                window.setGravity(Gravity.BOTTOM)
+                window.setGravity(Gravity.CENTER)
 
                 val params = window.getAttributes()
                 params.width = WindowManager.LayoutParams.MATCH_PARENT
