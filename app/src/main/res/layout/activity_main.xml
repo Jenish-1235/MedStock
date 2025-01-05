@@ -37,14 +37,19 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar6">
+        app:layout_constraintTop_toBottomOf="@id/toolbar6"
+        android:layout_margin="5dp">
 
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/search_bar"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search Medicines"
-            android:backgroundTint="@color/lightBlue"/>
+            android:queryHint="Search Medicines"
+            app:iconifiedByDefault="false"
+            android:background="@drawable/background_light_blue_rounded_corner_rect"
+            app:queryBackground="@null"
+            app:queryHint="Search Medicines"
+            />
 
     </LinearLayout>
 
