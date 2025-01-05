@@ -21,6 +21,10 @@ class GetMedicinesFromDB {
                     val medicine = medicineSnapshot.getValue(Medicine::class.java)
                     medicines.add(medicine!!)
                 }
+
+                // sort fetched medicines in alphabetical order and also ignore the case sensitive ness in their namee that is A and a is same...
+                medicines.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+
                 callback.onMedicinesLoaded(medicines)
             }
             override fun onCancelled(error: DatabaseError) {
