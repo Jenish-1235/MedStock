@@ -44,12 +44,23 @@ class MainActivity : AppCompatActivity() {
                 medicineList.adapter = MedicineListAdapter(this@MainActivity, medicines)
                 medicineList.adapter?.notifyDataSetChanged()
 
+                // if is sorted by expiry date button is clicked... we sort by expiry and then make the button to behave like sorting by name button
+
 
                 val sortByExpiryDateButton:ExtendedFloatingActionButton = findViewById(R.id.sortByExpiryDateButton)
                 sortByExpiryDateButton.setOnClickListener {
-                    val sortedMedicines = normalizeAndSortMedicines(medicines)
-                    medicineList.adapter = MedicineListAdapter(this@MainActivity, sortedMedicines)
-                    medicineList.adapter?.notifyDataSetChanged()
+                    if(sortByExpiryDateButton.text == "Sort by Expiry"){
+                        val sortedMedicines = normalizeAndSortMedicines(medicines)
+                        medicineList.adapter = MedicineListAdapter(this@MainActivity, sortedMedicines)
+                        medicineList.adapter?.notifyDataSetChanged()
+                        sortByExpiryDateButton.text = "Sort by Name"
+                    }else{
+                        val sortedMedicines = ArrayList(medicines)
+                        sortedMedicines.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+                        medicineList.adapter = MedicineListAdapter(this@MainActivity, sortedMedicines)
+                        medicineList.adapter?.notifyDataSetChanged()
+                        sortByExpiryDateButton.text = "Sort by Expiry"
+                    }
                 }
             }
         })
