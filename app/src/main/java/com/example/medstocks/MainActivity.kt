@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val addNewMedicineButton:Button = findViewById(R.id.newMedicineButton)
         addNewMedicineButton.setOnClickListener {
             val dialog = AddNewMedicineDialog()
@@ -62,8 +65,29 @@ class MainActivity : AppCompatActivity() {
                         sortByExpiryDateButton.text = "Sort by Expiry"
                     }
                 }
+
+                val medicineSearchView = findViewById<SearchView>(R.id.search_view)
+                medicineSearchView.setOnQueryTextListener(object : OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        val filteredMedicines = ArrayList<Medicine>()
+                        for (medicine in medicines) {
+                            if (medicine.name.toLowerCase().contains(newText!!.toLowerCase())) {
+                                filteredMedicines.add(medicine)
+                            }
+                            medicineList.adapter = MedicineListAdapter(this@MainActivity, filteredMedicines)
+                            medicineList.adapter?.notifyDataSetChanged()
+                        }
+                        return true
+                    }
+
+                })
             }
         })
+
 
 
     }
